@@ -28,14 +28,16 @@ router.get("/scrape", function(req, res) {
             //save and empty result object
             var result = {};
             //add selected information for each article as properties of the results object
-            result.title = $(this).children(".item-info").find("h2.title").text();
-            result.link = $(this).children(".item-info").find("h2.title").find("a").attr("href");
-            result.teaser = $(this).children(".item-info").find("p.teaser").text();
+            result.title = $(this).children(".item-info-wrap").find(".item-info").find("h2.title").text();
+            result.link = $(this).children(".item-info-wrap").find(".item-info").find("h2.title").find("a").attr("href");
+            result.teaser = $(this).children(".item-info-wrap").find(".item-info").find("p.teaser").text();
             result.imgLink = $(this).children(".item-image").find("a").find("img").attr("src");
             //if we get valid result push object into array
             if (result.title && result.link && result.teaser && result.imgLink) {
                 articles.push(result);
             }
+            //result.test = $(this).children(".item-info-wrap").find(".item-info").find("h2.title").text();
+            //console.log(result.test);
         });
         var hbsObject = { article: articles, num: num };
         //redirect to articles page and display results
